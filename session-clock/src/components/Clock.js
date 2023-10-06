@@ -20,7 +20,11 @@ const Clock = () => {
 
 	// Handle start/stop button click
 	const handleStartStopClick = () => {
-		dispatch(toggleClock());
+		if (isRunning) {
+			dispatch(toggleClock()); // Pause the clock
+		} else {
+			dispatch(toggleClock()); // Start or resume the clock
+		}
 	};
 
 	// Handle reset button click
