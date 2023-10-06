@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Grid, Paper } from '@mui/material';
+import Clock from './components/Clock';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Grid
+			container
+			spacing={0}
+			alignItems="center"
+			justifyContent="center"
+			style={{ minHeight: '100vh' }}
+		>
+			<Grid item xs={12}>
+				<Paper className="App">
+					<Clock />
+				</Paper>
+			</Grid>
+		</Grid>
+	);
 }
 
 export default App;
