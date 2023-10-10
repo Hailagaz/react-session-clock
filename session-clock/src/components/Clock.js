@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Typography, Button } from '@mui/material';
-import { decrementBreak, incrementBreak, decrementSession, incrementSession, resetClock, toggleClock, selectClock, selectIsRunning, selectIsSession } from '../redux/clockSlice';
+import {
+	decrementBreak,
+	incrementBreak,
+	decrementSession,
+	incrementSession,
+	resetClock,
+	toggleClock,
+	selectClock,
+	selectIsRunning,
+	selectIsSession,
+} from '../redux/clockSlice';
 import useInterval from '../hooks/useInterval';
 import beepSound from '../audio/BeepSound.wav';
 
@@ -20,11 +30,7 @@ const Clock = () => {
 
 	// Handle start/stop button click
 	const handleStartStopClick = () => {
-		if (isRunning) {
-			dispatch(toggleClock()); // Pause the clock
-		} else {
-			dispatch(toggleClock()); // Start or resume the clock
-		}
+		dispatch(toggleClock());
 	};
 
 	// Handle reset button click
@@ -58,7 +64,11 @@ const Clock = () => {
 	};
 
 	// Beep sound when timer reaches 0
-	const beepRef = React.createRef();
+	const beepRef = useRef();
+
+	useEffect(() => {
+		beepRef.current.load(); // Reset audio element on component mount
+	}, []);
 
 	useInterval(
 		() => {
@@ -90,19 +100,13 @@ const Clock = () => {
 						<Typography variant="h6" id="break-label">
 							Break Length
 						</Typography>
-						<Button
-							id="break-decrement"
-							onClick={handleBreakDecrement}
-						>
+						<Button id="break-decrement" onClick={handleBreakDecrement}>
 							-
 						</Button>
 						<Typography variant="h6" id="break-length">
 							{breakLength}
 						</Typography>
-						<Button
-							id="break-increment"
-							onClick={handleBreakIncrement}
-						>
+						<Button id="break-increment" onClick={handleBreakIncrement}>
 							+
 						</Button>
 					</Grid>
@@ -110,19 +114,13 @@ const Clock = () => {
 						<Typography variant="h6" id="session-label">
 							Session Length
 						</Typography>
-						<Button
-							id="session-decrement"
-							onClick={handleSessionDecrement}
-						>
+						<Button id="session-decrement" onClick={handleSessionDecrement}>
 							-
 						</Button>
 						<Typography variant="h6" id="session-length">
 							{sessionLength}
 						</Typography>
-						<Button
-							id="session-increment"
-							onClick={handleSessionIncrement}
-						>
+						<Button id="session-increment" onClick={handleSessionIncrement}>
 							+
 						</Button>
 					</Grid>
