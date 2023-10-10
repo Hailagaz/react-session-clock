@@ -30,7 +30,7 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 1. Clone the repository:
 
-  ```
+  ```npm
   	git clone https://github.com/your-username/25-plus-5-clock.git
 	```
 
