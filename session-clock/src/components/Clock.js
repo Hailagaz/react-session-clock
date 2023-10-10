@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Typography, Button } from '@mui/material';
 import {
@@ -12,33 +12,56 @@ import {
 	selectIsRunning,
 	selectIsSession,
 } from '../redux/clockSlice';
-import useInterval from '../hooks/useInterval';
 import beepSound from '../audio/BeepSound.wav';
 
 const Clock = () => {
 	const dispatch = useDispatch();
-	const { breakLength, sessionLength, timerLabel, timeLeft } = useSelector(selectClock);
-	const isRunning = useSelector(selectIsRunning);
+	const { breakLength, sessionLength, timerLabel, isRunning } = useSelector(selectClock);
 	const isSession = useSelector(selectIsSession);
 
-	// Helper function to format time in mm:ss
+	const [timeLeft, setTimeLeft] = useState(sessionLength * 60);
+
+	const timerRef = useRef(null);
+	const beepRef = useRef();
+
 	const formatTime = (seconds) => {
 		const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
 		const secs = (seconds % 60).toString().padStart(2, '0');
 		return `${mins}:${secs}`;
 	};
 
-	// Handle start/stop button click
+	const startTimer = () => {
+		timerRef.current = setInterval(() => {
+			setTimeLeft((prevTimeLeft) => {
+				if (prevTimeLeft === 1) {
+					beepRef.current.play();
+					dispatch(toggleClock()); // Switch to break
+					return breakLength * 60;
+				}
+				return prevTimeLeft - 1;
+			});
+		}, 1000);
+	};
+
+	const stopTimer = () => {
+		clearInterval(timerRef.current);
+	};
+
 	const handleStartStopClick = () => {
+		if (isRunning) {
+			stopTimer();
+		} else {
+			startTimer();
+		}
 		dispatch(toggleClock());
 	};
 
-	// Handle reset button click
 	const handleResetClick = () => {
+		stopTimer();
 		dispatch(resetClock());
+		setTimeLeft(sessionLength * 60);
 	};
 
-	// Handle break and session length changes
 	const handleBreakDecrement = () => {
 		if (!isRunning && breakLength > 1) {
 			dispatch(decrementBreak());
@@ -54,31 +77,16 @@ const Clock = () => {
 	const handleSessionDecrement = () => {
 		if (!isRunning && sessionLength > 1) {
 			dispatch(decrementSession());
+			setTimeLeft((prevTimeLeft) => prevTimeLeft - 60);
 		}
 	};
 
 	const handleSessionIncrement = () => {
 		if (!isRunning && sessionLength < 60) {
 			dispatch(incrementSession());
+			setTimeLeft((prevTimeLeft) => prevTimeLeft + 60);
 		}
 	};
-
-	// Beep sound when timer reaches 0
-	const beepRef = useRef();
-
-	useInterval(
-		() => {
-			if (timeLeft === 0) {
-				beepRef.current.play();
-				if (isSession) {
-					dispatch(toggleClock()); // Switch to break
-				} else {
-					dispatch(toggleClock()); // Switch to session
-				}
-			}
-		},
-		isRunning ? 1000 : null
-	);
 
 	return (
 		<Grid container spacing={2} justifyContent="center">
