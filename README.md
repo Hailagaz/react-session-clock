@@ -30,7 +30,7 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 1. Clone the repository:
 
-  ```git clone https://github.com/your-username/25-plus-5-clock.git```
+	```git clone https://github.com/your-username/25-plus-5-clock.git```
 
 2. Navigate to the project directory:
 
@@ -44,9 +44,7 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 1. Start the development server:
 
-	```bash
-		npm start
-	```
+	```npm start```
 
 2. Open your web browser and go to http://localhost:3000.
 
