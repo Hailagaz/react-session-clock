@@ -30,19 +30,19 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 1. Clone the repository:
 
-  ```npm
+  ```bash
   	git clone https://github.com/your-username/25-plus-5-clock.git
 	```
 
 2. Navigate to the project directory:
 
-	```
+	```bash
 		cd 25-plus-5-clock
 	```
 
 3. Install the required dependencies:
 
-	```
+	```bash
 		npm install
 	```
 
@@ -50,7 +50,7 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 1. Start the development server:
 
-	```
+	```bash
 		npm start
 	```
 
@@ -64,8 +64,8 @@ A simple React-based 25 + 5 Clock application that allows you to set and track s
 
 You can customize the application by modifying the source code. Here are some customization options:
 
-Styling: Customize the CSS and styles in the ```src/App.css``` file.
-Audio: Replace the audio file ```src/audio/BeepSound.wav``` with your preferred sound.
+Styling: Customize the CSS and styles in the src/App.css file.
+Audio: Replace the audio file src/audio/BeepSound.wav with your preferred sound.
 
 ## Contributing
 
