@@ -6,13 +6,16 @@ import App from './App';
 import clockReducer from './redux/clockSlice';
 import './index.css';
 
+// Corrected import for createRoot
+import { createRoot } from 'react-dom/client';
+
 const store = configureStore({
 	reducer: {
 		clock: clockReducer,
 	},
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 
 root.render(
 	<Provider store={store}>
