@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Typography, Button } from '@mui/material';
 import {
@@ -65,10 +65,6 @@ const Clock = () => {
 
 	// Beep sound when timer reaches 0
 	const beepRef = useRef();
-
-	useEffect(() => {
-		beepRef.current.load(); // Reset audio element on component mount
-	}, []);
 
 	useInterval(
 		() => {
