@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-session-clock/static/css/main.1ef3a49a.css",
+    "main.js": "/react-session-clock/static/js/main.5d4247ee.js",
+    "static/media/BeepSound.wav": "/react-session-clock/static/media/BeepSound.7ce85a7d9053d11639cb.wav",
+    "index.html": "/react-session-clock/index.html",
+    "main.1ef3a49a.css.map": "/react-session-clock/static/css/main.1ef3a49a.css.map",
+    "main.5d4247ee.js.map": "/react-session-clock/static/js/main.5d4247ee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ef3a49a.css",
+    "static/js/main.5d4247ee.js"
+  ]
+}
